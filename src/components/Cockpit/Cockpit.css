@@ -1,0 +1,30 @@
+.red {
+	color: red;
+}
+
+.bold{
+	font-weight: bold;
+}
+
+.Button{
+	background-color: green;
+    font: inherit;
+	border: 1px solid blue;
+	color: white;
+	padding: 0.75rem;
+	cursor: pointer
+}
+
+.Button:hover{
+	background: lightgreen;
+	color:black;
+}
+
+.Button.Red{
+	background: red;
+}
+
+.Button.Red:hover{
+	background: salmon;
+	color: black;
+}
