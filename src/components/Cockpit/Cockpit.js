@@ -22,8 +22,9 @@ const Cockpit = (props) => {
     return (
 		<Aux>
 			<h1>Hi, I'm a {props.appTitle}</h1>
-	    <p className={assignedClasses.join(' ')}>This is really working!</p>
-	    <button className={btnClass} onClick={props.btnHandler}>Toggle person</button>
+            <p className={assignedClasses.join(' ')}>This is really working!</p>
+            <button className={btnClass} onClick={props.btnHandler}>Toggle person</button>
+            <button onClick={props.login}>Login</button>
 		</Aux>
 	)            
 }

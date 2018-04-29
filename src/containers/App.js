@@ -5,6 +5,8 @@ import Cockpit from "../components/Cockpit/Cockpit";
 import Aux from "../hoc/auxaux";
 import withClass from "../hoc/withClass2";
 
+export const AuthContext = React.createContext(false);
+
 class App extends PureComponent {
   constructor (props) {
     super(props);
@@ -18,7 +20,8 @@ class App extends PureComponent {
       ],
       otherState: 'dfsdf dsfsfsd',
       showPerson: false,
-      toggleClicked: 0
+      toggleClicked: 0,
+      authenticated: false    
     };
 
   }
@@ -41,10 +44,19 @@ class App extends PureComponent {
   componentWillUpdate(nextProps, nextState){
     console.log('[UPDATE App.js] inside componentWillUpdate', nextProps, nextState);
   }
+    
+  static getDerivedStateFromProps(nextProps, prevState){
+      console.log('[UPDATE App.js] inside getDerivedStateFromProps', nextProps, prevState);
+      return prevState;
+  } 
 
   componentDidUpdate(nextProps, nextState){
     console.log('[UPDATE App.js] inside componentDidUpdate');
   }
+    
+  getSnapshotBeforeUpdate(){
+      console.log('[UPDATE App.js] inside getSnapshotBeforeUpdate');
+  }    
 
   /*state = {
     persons: [
@@ -86,6 +98,10 @@ class App extends PureComponent {
     });
 
   }
+  
+  loginHandler = () => {
+      this.setState({authenticated: true});
+  }
 
   render() {
     console.log('[App.js] inside render()');
@@ -96,7 +112,7 @@ class App extends PureComponent {
       persons = <Persons 
                   persons={this.state.persons}
                   clicked={this.deletePersonHandler}
-                  changed={this.nameChangedHandler}/>
+                  changed={this.nameChangedHandler} />
       /*style[':hover'] = {
         background: 'salmon',
         color: 'black'
@@ -110,8 +126,11 @@ class App extends PureComponent {
           appTitle={this.props.title}
           persons={this.state.persons}
           showPerson={this.state.showPerson}
-          btnHandler={this.togglePersonHandler}/>
-        {persons}
+          btnHandler={this.togglePersonHandler}
+          login={this.loginHandler}/>
+        <AuthContext.Provider value={this.state.authenticated}>
+            {persons}
+        </AuthContext.Provider>
         </Aux>
     );
   }
